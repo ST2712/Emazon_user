@@ -1,10 +1,7 @@
 package com.bootcamp_2024_2.emazon.application.dto.request;
 
 import com.bootcamp_2024_2.emazon.domain.model.Role;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,14 +17,16 @@ public class UserRequest {
     @NotBlank(message = "Last name is required")
     private String lastName;
 
-    @NotBlank(message = "Identification is required")
+    @NotNull(message = "Identification is required")
+    @Positive(message = "Identification must be positive")
     private int identification;
 
     @NotBlank(message = "Phone is required")
-    @Max(value = 13, message = "Phone must have 13 digits")
+    @Size(min = 10, max = 13, message = "Phone must have 13 digits")
     private String phone;
 
-    @NotBlank(message = "Date of birth is required")
+    @NotNull(message = "Date of birth is required")
+    @Past(message = "Date of birth must be in the past")
     private LocalDate dateOfBirth;
 
     @NotBlank(message = "Email is required")

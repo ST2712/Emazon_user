@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserRestController {
 
-    private UserHandler userHandler;
+    private final UserHandler userHandler;
 
     @GetMapping(path = "/v1/users/{id}")
     @Operation(summary = "Retrieve a user by ID", description = "Returns the details of a specific user identified by its ID.")
