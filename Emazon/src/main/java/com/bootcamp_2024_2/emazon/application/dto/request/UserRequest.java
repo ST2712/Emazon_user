@@ -36,6 +36,7 @@ public class UserRequest {
     @NotBlank(message = "Password is required")
     private String password;
 
-    @NotNull(message = "Role is required")
-    private Role role;
+    @NotNull(message = "Role id is required")
+    @Positive
+    private Long roleId;
 }

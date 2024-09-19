@@ -30,8 +30,6 @@ public class UserEntity {
 
     private LocalDate dateOfBirth;
 
-    private String description;
-
     private String email;
 
     private String password;

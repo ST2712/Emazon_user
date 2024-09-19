@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class User {
 
+    private Long id;
     private String name;
     private String lastName;
     private int identification;
@@ -11,9 +12,10 @@ public class User {
     private LocalDate dateOfBirth;
     private String email;
     private String password;
-    private Role role;
+    private Long roleId;
 
-    public User(String name, String lastName, int identification, String phone, LocalDate dateOfBirth, String email, String password, Role role) {
+    public User(Long id, String name, String lastName, int identification, String phone, LocalDate dateOfBirth, String email, String password, Long roleId) {
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.identification = identification;
@@ -21,7 +23,15 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.roleId = roleId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public User() {
@@ -75,12 +85,12 @@ public class User {
         this.email = email;
     }
 
-    public Role getRole() {
-        return role;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public String getPassword() {

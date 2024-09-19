@@ -2,8 +2,11 @@ package com.bootcamp_2024_2.emazon.infrastructure.out.jpa.adapter;
 
 import com.bootcamp_2024_2.emazon.domain.model.User;
 import com.bootcamp_2024_2.emazon.domain.spi.IUserPersistencePort;
+import com.bootcamp_2024_2.emazon.infrastructure.exception.RoleNotFoundException;
+import com.bootcamp_2024_2.emazon.infrastructure.out.jpa.entity.RoleEntity;
 import com.bootcamp_2024_2.emazon.infrastructure.out.jpa.entity.UserEntity;
 import com.bootcamp_2024_2.emazon.infrastructure.out.jpa.mapper.UserEntityMapper;
+import com.bootcamp_2024_2.emazon.infrastructure.out.jpa.repository.IRoleRepository;
 import com.bootcamp_2024_2.emazon.infrastructure.out.jpa.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +17,7 @@ public class UserJpaAdapter implements IUserPersistencePort {
 
     private final IUserRepository userRepository;
     private final UserEntityMapper userEntityMapper;
+    private final IRoleRepository roleRepository;
 
     @Override
     public Optional<User> findById(Long id) {
@@ -23,7 +27,12 @@ public class UserJpaAdapter implements IUserPersistencePort {
 
     @Override
     public User save(User user) {
-        UserEntity userEntity = userRepository.save(userEntityMapper.toEntityUser(user));
+        Optional<RoleEntity> optionalRole = roleRepository.findById(user.getRoleId());
+        if(optionalRole.isEmpty()){
+            throw new RoleNotFoundException("Role was not found");
+        }
+        UserEntity userEntity =  userEntityMapper.toEntityUser(user);
+        userEntity.setRole(optionalRole.get());
         UserEntity savedUserEntity = userRepository.save(userEntity);
         return userEntityMapper.toUser(savedUserEntity);
     }
