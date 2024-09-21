@@ -18,6 +18,9 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
+    public static final String ADMIN = "ADMIN";
+
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -35,6 +38,8 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/roles/**").hasRole(ADMIN)
+                        .requestMatchers("/users/**").hasRole(ADMIN)
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
