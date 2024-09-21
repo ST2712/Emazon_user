@@ -3,6 +3,7 @@ package com.bootcamp_2024_2.emazon.infrastructure.configuration.security;
 import com.bootcamp_2024_2.emazon.application.dto.request.LoginRequest;
 import com.bootcamp_2024_2.emazon.application.dto.request.UserRequest;
 import com.bootcamp_2024_2.emazon.application.dto.response.UserResponse;
+import com.bootcamp_2024_2.emazon.application.handler.UserHandler;
 import com.bootcamp_2024_2.emazon.infrastructure.out.jpa.entity.UserEntity;
 import com.bootcamp_2024_2.emazon.infrastructure.out.jpa.mapper.UserEntityMapper;
 import com.bootcamp_2024_2.emazon.infrastructure.out.jpa.repository.IUserRepository;
@@ -16,20 +17,22 @@ public class AuthenticationService {
     private final IUserRepository userRepository;
     private final UserEntityMapper userEntityMapper;
     private final AuthenticationManager authenticationManager;
+    private final UserHandler userHandler;
 
     public AuthenticationService(
             IUserRepository userRepository,
             UserEntityMapper userEntityMapper,
-            AuthenticationManager authenticationManager
+            AuthenticationManager authenticationManager,
+            UserHandler userHandler
     ) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.userEntityMapper = userEntityMapper;
+        this.userHandler = userHandler;
     }
 
-    public UserResponse signup(UserRequest input) {
-        UserEntity user = userRepository.save(userEntityMapper.toEntityUser(input));
-        return userEntityMapper.toUserResponse(user);
+    public UserResponse signup(UserRequest userRequest) {
+        return userHandler.save(userRequest);
     }
 
     public UserEntity authenticate(LoginRequest loginRequest) {
