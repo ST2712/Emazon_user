@@ -1,6 +1,7 @@
 package com.bootcamp_2024_2.emazon.infrastructure.input.rest;
 
 
+import com.bootcamp_2024_2.emazon.application.dto.request.LoginRequest;
 import com.bootcamp_2024_2.emazon.application.dto.request.UserRequest;
 import com.bootcamp_2024_2.emazon.application.dto.response.LoginResponse;
 import com.bootcamp_2024_2.emazon.application.dto.response.UserResponse;
@@ -29,8 +30,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> authenticate(@RequestBody UserRequest loginUserDto){
-        UserEntity authenticatedUser = authenticationService.authenticate(loginUserDto);
+    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginRequest loginRequest){
+        UserEntity authenticatedUser = authenticationService.authenticate(loginRequest);
         String jwtToken = jwtService.generateToken(authenticatedUser);
         LoginResponse loginResponse = new LoginResponse(jwtToken);
         return ResponseEntity.ok(loginResponse);
