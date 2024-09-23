@@ -36,6 +36,12 @@ public class UserUseCase implements IUserServicePort {
         return userPersistencePort.save(user);
     }
 
+    @Override
+    public User findByEmail(String email) {
+        return userPersistencePort.findByEmail(email)
+                .orElseThrow(UserNotFoundException::new);
+    }
+
     private boolean checkAge(User user) {
         LocalDate dateOfBirth = user.getDateOfBirth();
         LocalDate currentDate = LocalDate.now();

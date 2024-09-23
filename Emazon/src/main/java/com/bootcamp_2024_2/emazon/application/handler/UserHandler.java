@@ -29,4 +29,10 @@ public class UserHandler implements IUserHandler{
     public UserResponse save(UserRequest user) {
         return userResponseMapper.toResponse(userServicePort.save(userRequestMapper.toUser(user)));
     }
+
+    @Override
+    public UserResponse findByEmail(String email) {
+        User user = userServicePort.findByEmail(email);
+        return userResponseMapper.toResponse(user);
+    }
 }

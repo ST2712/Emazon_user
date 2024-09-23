@@ -40,20 +40,9 @@ public class UserRestController {
     }
 
     @PostMapping(path = "/v1/users")
-    @Operation(summary = "Create a new user", description = "Creates a new user with a unique name and description.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User successfully created",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserResponse.class))}),
-            @ApiResponse(responseCode = "400", description = "Invalid input data",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Internal server error",
-                    content = @Content)
-    })
-    public ResponseEntity<UserResponse> createCategory(
-            @Parameter(description = "Category data to be created", required = true)
-            @Valid @RequestBody UserRequest request){
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(userHandler.save(request));
+    public UserResponse getByEmail(
+            @Parameter(description = "Email of the user to be retrieved", example = "email@gmail.com")
+            @RequestBody String email) {
+        return userHandler.findByEmail(email);
     }
 }
