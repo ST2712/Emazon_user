@@ -14,7 +14,6 @@ public class ShoppingCarRequest {
 
     @Positive(message = "Article id must be positive")
     private long articleId;
-    @Positive(message = "User id must be positive")
     private long userId;
     @PositiveOrZero(message = "Quantity must be positive")
     private int quantity;

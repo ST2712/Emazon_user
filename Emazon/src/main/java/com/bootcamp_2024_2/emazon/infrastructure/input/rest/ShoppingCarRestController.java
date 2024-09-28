@@ -19,7 +19,12 @@ public class ShoppingCarRestController {
     }
 
     @PostMapping(path = "/v1/shopping_cart")
-    public ShoppingCarResponse saveShoppingCart(@RequestBody ShoppingCarRequest request) {
-        return shoppingCarService.saveShoppingCar(request);
+    public ShoppingCarResponse saveShoppingCar(
+            @RequestHeader("Authorization") String authorizationHeader,
+            @RequestBody ShoppingCarRequest request) {
+
+        // Extraer el token del encabezado Authorization
+        String token = authorizationHeader.substring(7); // "Bearer " tiene 7 caracteres
+        return shoppingCarService.saveShoppingCar(token, request);
     }
 }

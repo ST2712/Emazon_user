@@ -35,6 +35,7 @@ public class UserEntity implements UserDetails {
 
     private LocalDate dateOfBirth;
 
+    @Column(unique = true)
     private String email;
 
     private String password;
