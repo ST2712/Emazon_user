@@ -40,7 +40,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/users/**").permitAll()
-                        .requestMatchers("/roles/**").permitAll()
+                        .requestMatchers("/roles/**").hasRole(ADMIN)
                         .requestMatchers("/shopping_cart/**").hasRole(CLIENT)
                         .anyRequest().authenticated()
                 )
