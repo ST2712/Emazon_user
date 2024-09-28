@@ -1,7 +1,5 @@
 package com.bootcamp_2024_2.emazon.domain.model;
 
-import lombok.Builder;
-
 import java.time.LocalDateTime;
 import java.util.List;
 

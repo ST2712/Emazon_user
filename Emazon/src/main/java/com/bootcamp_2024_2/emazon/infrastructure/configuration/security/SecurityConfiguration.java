@@ -20,6 +20,7 @@ import java.util.List;
 public class SecurityConfiguration {
 
     public static final String ADMIN = "ADMIN";
+    public static final String CLIENT = "CLIENT";
 
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -40,6 +41,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/users/**").permitAll()
                         .requestMatchers("/roles/**").hasRole(ADMIN)
+                        .requestMatchers("/shopping_cart/**").hasRole(CLIENT)
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
