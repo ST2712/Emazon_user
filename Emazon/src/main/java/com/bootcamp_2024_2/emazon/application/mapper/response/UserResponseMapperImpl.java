@@ -37,6 +37,7 @@ public class UserResponseMapperImpl implements UserResponseMapper {
             orElseThrow( () -> new RuntimeException( "Role not found" ) );
 
         userResponse.setRoleName( role.getName() );
+        userResponse.setShoppingCarIds( user.getShoppingCarIds() );
         return userResponse;
     }
 }

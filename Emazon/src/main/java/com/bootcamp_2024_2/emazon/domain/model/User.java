@@ -1,6 +1,7 @@
 package com.bootcamp_2024_2.emazon.domain.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class User {
 
@@ -13,8 +14,10 @@ public class User {
     private String email;
     private String password;
     private Long roleId;
+    private List<Long> shoppingCarIds;
 
-    public User(Long id, String name, String lastName, int identification, String phone, LocalDate dateOfBirth, String email, String password, Long roleId) {
+    public User(Long id, String name, String lastName, int identification, String phone, LocalDate dateOfBirth,
+                String email, String password, Long roleId, List<Long> shoppingCarIds) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -24,6 +27,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.roleId = roleId;
+        this.shoppingCarIds = shoppingCarIds;
     }
 
     public Long getId() {
@@ -99,5 +103,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Long> getShoppingCarIds() {
+        return shoppingCarIds;
+    }
+
+    public void setShoppingCarIds(List<Long> shoppingCarIds) {
+        this.shoppingCarIds = shoppingCarIds;
     }
 }

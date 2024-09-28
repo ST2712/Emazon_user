@@ -10,6 +10,7 @@ import com.bootcamp_2024_2.emazon.infrastructure.out.jpa.repository.IRoleReposit
 import com.bootcamp_2024_2.emazon.infrastructure.out.jpa.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -33,6 +34,7 @@ public class UserJpaAdapter implements IUserPersistencePort {
         }
         UserEntity userEntity =  userEntityMapper.toEntityUser(user);
         userEntity.setRole(optionalRole.get());
+        userEntity.setCarritoIds(new ArrayList<>());
         UserEntity savedUserEntity = userRepository.save(userEntity);
         return userEntityMapper.toUser(savedUserEntity);
     }

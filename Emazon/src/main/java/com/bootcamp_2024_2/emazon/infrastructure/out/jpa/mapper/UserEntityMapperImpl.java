@@ -33,6 +33,7 @@ public class UserEntityMapperImpl implements UserEntityMapper {
         user.setEmail( userEntity.getEmail() );
         user.setPassword( userEntity.getPassword() );
         user.setRoleId( userEntity.getRole().getId() );
+        user.setShoppingCarIds( userEntity.getCarritoIds() );
 
         return user;
     }
@@ -56,6 +57,7 @@ public class UserEntityMapperImpl implements UserEntityMapper {
         RoleEntity roleEntity = roleRepository.findById(user.getRoleId())
                 .orElseThrow(RoleNotFoundException::new);
         userEntity.setRole( roleEntity );
+        userEntity.setCarritoIds( user.getShoppingCarIds() );
 
         return userEntity;
     }
